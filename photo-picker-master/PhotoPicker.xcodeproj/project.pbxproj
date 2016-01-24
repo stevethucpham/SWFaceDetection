@@ -12,6 +12,8 @@
 		46FF4EC21A72DA0300350F09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46FF4EC01A72DA0300350F09 /* Main.storyboard */; };
 		46FF4EC41A72DA0300350F09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46FF4EC31A72DA0300350F09 /* Images.xcassets */; };
 		46FF4EC71A72DA0300350F09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46FF4EC51A72DA0300350F09 /* LaunchScreen.xib */; };
+		8B61A85A1C5542C200DB9AFA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61A8591C5542C200DB9AFA /* CoreImage.framework */; };
+		8B61A85C1C55434100DB9AFA /* hige_100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B61A85B1C55434100DB9AFA /* hige_100.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		46FF4EC11A72DA0300350F09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46FF4EC31A72DA0300350F09 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		46FF4EC61A72DA0300350F09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		8B61A8591C5542C200DB9AFA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		8B61A85B1C55434100DB9AFA /* hige_100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hige_100.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B61A85A1C5542C200DB9AFA /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +43,7 @@
 		46FF4EAE1A72DA0300350F09 = {
 			isa = PBXGroup;
 			children = (
+				8B61A8591C5542C200DB9AFA /* CoreImage.framework */,
 				46FF4EB91A72DA0300350F09 /* PhotoPicker */,
 				46FF4EB81A72DA0300350F09 /* Products */,
 			);
@@ -54,6 +60,7 @@
 		46FF4EB91A72DA0300350F09 /* PhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
+				8B61A85B1C55434100DB9AFA /* hige_100.png */,
 				46FF4EBC1A72DA0300350F09 /* AppDelegate.swift */,
 				46FF4EBE1A72DA0300350F09 /* ViewController.swift */,
 				46FF4EC01A72DA0300350F09 /* Main.storyboard */,
@@ -105,7 +112,7 @@
 				TargetAttributes = {
 					46FF4EB61A72DA0300350F09 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = LAUV76V9R8;
+						DevelopmentTeam = 73ELQMT9MX;
 					};
 				};
 			};
@@ -132,6 +139,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B61A85C1C55434100DB9AFA /* hige_100.png in Resources */,
 				46FF4EC21A72DA0300350F09 /* Main.storyboard in Resources */,
 				46FF4EC71A72DA0300350F09 /* LaunchScreen.xib in Resources */,
 				46FF4EC41A72DA0300350F09 /* Images.xcassets in Resources */,
@@ -256,7 +264,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = PhotoPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.drivecurrent.Photo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drivecurrent.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -269,7 +277,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: thuc.pham@sutrixmedia.com (W9W59A23K7)";
 				INFOPLIST_FILE = PhotoPicker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.drivecurrent.Photo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.drivecurrent.face;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
