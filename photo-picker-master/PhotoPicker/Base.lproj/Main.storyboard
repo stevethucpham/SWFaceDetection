@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,11 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="auY-gV-MrQ">
-                                <rect key="frame" x="1" y="286" width="600" height="237"/>
-                            </imageView>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="epI-cg-NEv">
-                                <rect key="frame" x="1" y="28" width="600" height="238"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="530"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iD-u0-eCd">
@@ -38,29 +36,63 @@
                                     <action selector="didPressTakePhoto:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WD2-u3-xGc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tg2-2q-Gdf">
+                                <rect key="frame" x="541" y="550" width="46" height="30"/>
+                                <state key="normal" title="Photo"/>
+                                <connections>
+                                    <action selector="didPressPhotoLibrary:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Zi8-N7-VBj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="auY-gV-MrQ" secondAttribute="centerX" constant="-0.5" id="22Z-J7-rjh"/>
-                            <constraint firstAttribute="centerX" secondItem="epI-cg-NEv" secondAttribute="centerX" constant="-0.5" id="2rX-Ez-Lev"/>
+                            <constraint firstAttribute="centerX" secondItem="epI-cg-NEv" secondAttribute="centerX" id="2rX-Ez-Lev"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="9iD-u0-eCd" secondAttribute="bottom" constant="20" id="Hq6-Ro-UqF"/>
-                            <constraint firstItem="9iD-u0-eCd" firstAttribute="top" secondItem="auY-gV-MrQ" secondAttribute="bottom" constant="27" id="I1p-jq-1OE"/>
-                            <constraint firstItem="epI-cg-NEv" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="L69-4k-T9q"/>
+                            <constraint firstItem="epI-cg-NEv" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="L69-4k-T9q"/>
                             <constraint firstAttribute="centerX" secondItem="9iD-u0-eCd" secondAttribute="centerX" id="R8q-2P-WlC"/>
-                            <constraint firstItem="auY-gV-MrQ" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="TPd-vK-ce0"/>
-                            <constraint firstItem="auY-gV-MrQ" firstAttribute="top" secondItem="epI-cg-NEv" secondAttribute="bottom" constant="20" id="YeX-sI-U8R"/>
-                            <constraint firstItem="auY-gV-MrQ" firstAttribute="width" secondItem="epI-cg-NEv" secondAttribute="width" id="hp2-gT-aKM"/>
-                            <constraint firstItem="epI-cg-NEv" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="lW8-o8-QAn"/>
-                            <constraint firstItem="auY-gV-MrQ" firstAttribute="height" secondItem="epI-cg-NEv" secondAttribute="height" id="nul-H3-A4x"/>
+                            <constraint firstItem="9iD-u0-eCd" firstAttribute="top" secondItem="epI-cg-NEv" secondAttribute="bottom" constant="20" id="hY3-0P-Apn"/>
+                            <constraint firstItem="epI-cg-NEv" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="vSM-CY-2Ag"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="capturedImage" destination="auY-gV-MrQ" id="P7B-FJ-zjs"/>
                         <outlet property="previewView" destination="epI-cg-NEv" id="aVZ-TC-13m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="191" y="189"/>
+        </scene>
+        <!--Image Viewer View Controller-->
+        <scene sceneID="fhj-6o-ktY">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewerVC" id="U1Z-C6-Bv8" customClass="ImageViewerViewController" customModule="PhotoPicker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8fs-sD-Su4"/>
+                        <viewControllerLayoutGuide type="bottom" id="SO4-k7-KU2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="krI-zc-nED">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rXA-lK-eJL">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="480"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rXA-lK-eJL" firstAttribute="centerX" secondItem="krI-zc-nED" secondAttribute="centerX" id="7aO-u7-Oyw"/>
+                            <constraint firstItem="rXA-lK-eJL" firstAttribute="top" secondItem="8fs-sD-Su4" secondAttribute="bottom" constant="-20" id="VMx-Hr-R9n"/>
+                            <constraint firstItem="rXA-lK-eJL" firstAttribute="width" secondItem="krI-zc-nED" secondAttribute="width" id="WQv-sM-stZ"/>
+                            <constraint firstItem="rXA-lK-eJL" firstAttribute="height" secondItem="krI-zc-nED" secondAttribute="height" multiplier="0.8" id="uCs-YS-Dsj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="capturedImage" destination="rXA-lK-eJL" id="Nla-ye-9WE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQn-ry-jEh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="948" y="189"/>
         </scene>
     </scenes>
 </document>

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var capturedImage: UIImageView!
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
                 captureSession!.addOutput(stillImageOutput)
                 
                 previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspect
+                previewLayer!.videoGravity = AVLayerVideoGravityResizeAspectFill
                 previewLayer!.connection?.videoOrientation = AVCaptureVideoOrientation.Portrait
                 previewView.layer.addSublayer(previewLayer!)
                 
@@ -85,91 +85,44 @@ class ViewController: UIViewController {
                     let dataProvider = CGDataProviderCreateWithCFData(imageData)
                     let cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
                     
-                    let image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.LeftMirrored)
+                    var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: UIImageOrientation.LeftMirrored)
+                    image = Utils.resizeImage(image, newWidth:self.view.frame.size.width)
 //                    self.capturedImage.image = image
-//                    self.capturedImage.image = self.imageEffect(self.capturedImage.image!)
-                    self.capturedImage.image = self.imageEffect(image)
+                    Utils.saveImage(image, path: Utils.getDocumentsURL())
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("ImageViewerVC") as! ImageViewerViewController
+                    self.presentViewController(vc, animated: true, completion: nil)
                 }
             })
         }
     }
     
-    func imageEffect(effectImage: UIImage) -> UIImage {
-        var ciImage  = CIImage(CGImage:effectImage.CGImage!)
-        var ciDetector = CIDetector(ofType:CIDetectorTypeFace
-            ,context:nil
-            ,options:[
-                CIDetectorAccuracy:CIDetectorAccuracyHigh,
-                CIDetectorSmile:true
-            ]
-        )
-        var features = ciDetector.featuresInImage(ciImage)
-        
-        UIGraphicsBeginImageContext(effectImage.size)
-        effectImage.drawInRect(CGRectMake(0,0,effectImage.size.width,effectImage.size.height))
-        
-        for feature in features{
-            
-            //context
-            var drawCtxt = UIGraphicsGetCurrentContext()
-            var faceFeature = feature as! CIFaceFeature
-            //face
-            var faceRect = (feature as! CIFaceFeature).bounds
-            faceRect.origin.y = effectImage.size.height - faceRect.origin.y - faceRect.size.height
-            CGContextSetStrokeColorWithColor(drawCtxt, UIColor.redColor().CGColor)
-            CGContextStrokeRect(drawCtxt,faceRect)
-            
-            //mouse
-            if(faceFeature.hasMouthPosition){
-                var mouseRectY = effectImage.size.height - faceFeature.mouthPosition.y
-                var mouseRect  = CGRectMake(faceFeature.mouthPosition.x - 5,mouseRectY - 5,10,10)
-                CGContextSetStrokeColorWithColor(drawCtxt,UIColor.blueColor().CGColor)
-                CGContextStrokeRect(drawCtxt,mouseRect)
-            }
-            
-            //hige
-            var higeImg      = UIImage(named:"hige_100.png")
-            var mouseRectY = effectImage.size.height - faceFeature.mouthPosition.y
-            //ヒゲの横幅は顔の4/5程度
-            var higeWidth  = faceRect.size.width * 4/5
-            var higeHeight = higeWidth * 0.3 // 元画像が100:30なのでWidthの30%が縦幅
-            var higeRect  = CGRectMake(faceFeature.mouthPosition.x - higeWidth/2,mouseRectY - higeHeight/2,higeWidth,higeHeight)
-            CGContextDrawImage(drawCtxt,higeRect,higeImg!.CGImage)
-            
-            //leftEye
-            if((faceFeature.hasLeftEyePosition)){
-                var leftEyeRectY = effectImage.size.height - faceFeature.leftEyePosition.y
-                var leftEyeRect  = CGRectMake(faceFeature.leftEyePosition.x - 5,leftEyeRectY - 5,10,10)
-                CGContextSetStrokeColorWithColor(drawCtxt, UIColor.blueColor().CGColor)
-                CGContextStrokeRect(drawCtxt,leftEyeRect)
-            }
-            
-            //rightEye
-            if((faceFeature.hasRightEyePosition) ){
-                var rightEyeRectY = effectImage.size.height - faceFeature.rightEyePosition.y
-                var rightEyeRect  = CGRectMake(faceFeature.rightEyePosition.x - 5,rightEyeRectY - 5,10,10)
-                CGContextSetStrokeColorWithColor(drawCtxt, UIColor.blueColor().CGColor)
-                CGContextStrokeRect(drawCtxt,rightEyeRect)
-            }
-        }
-        var drawedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return drawedImage
-    }
     
     @IBAction func didPressTakeAnother(sender: AnyObject) {
         captureSession!.startRunning()
     }
     
-//    func frontCamera() -> AVCaptureDevice {
-//        let devices = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-//        for device in devices {
-//            let device = device as AVCaptureDevice
-//            if device.position == AVCaptureDevicePosition.Front {
-//                return device
-//            }
-//        }
-//    }
+    @IBAction func didPressPhotoLibrary(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            imagePicker.allowsEditing = true
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: Delegates
+    func imagePickerController(
+        picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        
+    }
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
+    }
+
 
 
 }
