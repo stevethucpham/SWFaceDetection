@@ -75,15 +75,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rXA-lK-eJL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eJ-vm-rTd">
+                                <rect key="frame" x="15" y="555" width="46" height="30"/>
+                                <state key="normal" title="Close"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rXA-lK-eJL" firstAttribute="centerX" secondItem="krI-zc-nED" secondAttribute="centerX" id="7aO-u7-Oyw"/>
                             <constraint firstItem="rXA-lK-eJL" firstAttribute="top" secondItem="8fs-sD-Su4" secondAttribute="bottom" constant="-20" id="VMx-Hr-R9n"/>
                             <constraint firstItem="rXA-lK-eJL" firstAttribute="width" secondItem="krI-zc-nED" secondAttribute="width" id="WQv-sM-stZ"/>
-                            <constraint firstItem="rXA-lK-eJL" firstAttribute="height" secondItem="krI-zc-nED" secondAttribute="height" multiplier="0.8" id="uCs-YS-Dsj"/>
+                            <constraint firstItem="rXA-lK-eJL" firstAttribute="height" secondItem="krI-zc-nED" secondAttribute="height" multiplier="0.9" id="uCs-YS-Dsj"/>
                         </constraints>
                     </view>
                     <connections>

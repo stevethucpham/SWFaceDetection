@@ -20,10 +20,10 @@ class ImageViewerViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.capturedImage.image = Utils.loadImageFromPath(Utils.getDocumentsURL())!
-//        self.capturedImage.image = self.imageEffect(self.capturedImage.image!)
-        let effectImage = self.imageEffect(self.capturedImage.image!)
-        self.capturedImage.image = effectImage
+//        self.capturedImage.image = Utils.loadImageFromPath(Utils.getDocumentsURL())!
+//        let effectImage = self.imageEffect(self.capturedImage.image!)
+//        self.capturedImage.image = effectImage
+        self.capturedImage.image = self.imageEffect(Utils.loadImageFromPath(Utils.getDocumentsURL())!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,17 +31,9 @@ class ImageViewerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func imageEffect(effectImage: UIImage) -> UIImage {
-        let ciImage  = CIImage(CGImage:effectImage.CGImage!)
-        let ciDetector = CIDetector(ofType:CIDetectorTypeFace
-            ,context:nil
-            ,options:[
-                CIDetectorAccuracy:CIDetectorAccuracyHigh
-            ]
-        )
+    func getImageOrientation (image:UIImage) -> (Int) {
         var exifOrientation = 0;
-        switch (effectImage.imageOrientation) {
+        switch (image.imageOrientation) {
         case .Up:
             exifOrientation = 1;
             break;
@@ -67,13 +59,20 @@ class ImageViewerViewController: UIViewController {
             exifOrientation = 7;
             break;
         }
+        return exifOrientation
+    }
+    
+    
+    func imageEffect(effectImage: UIImage) -> UIImage {
+        let ciImage  = CIImage(CGImage:effectImage.CGImage!)
+        let ciDetector = CIDetector(ofType:CIDetectorTypeFace
+            ,context:nil
+            ,options:[
+                CIDetectorAccuracy:CIDetectorAccuracyHigh
+            ])
         
-        let imageOptions = NSDictionary(dictionary:[CIDetectorImageOrientation:exifOrientation])
-        
-        let dict = imageOptions as? [String : AnyObject]
-        
-        print(dict)
-        
+        let imageOptions = NSDictionary(dictionary:[CIDetectorImageOrientation:self.getImageOrientation(effectImage)])
+                
         let features = ciDetector.featuresInImage(ciImage,options:imageOptions as? [String : AnyObject])
         
         UIGraphicsBeginImageContext(effectImage.size)
@@ -127,17 +126,4 @@ class ImageViewerViewController: UIViewController {
         UIGraphicsEndImageContext()
         return drawedImage
     }
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
